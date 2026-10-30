@@ -88,11 +88,8 @@ resultLast.addEventListener('click', (e) => {
     output1 = ''
     output2 = ''
     result = ''
-  })
-  
-  del.addEventListener('click', (e) => {
-    underoutput.innerText = underoutput.innerText.toString().slice(0, -1)
-    output2 = output2.toString().slice(0, -1)
+    operationLast = ''
+    oneDot = false
   })
   
   window.addEventListener('keydown', (e) => {
@@ -149,7 +146,9 @@ resultLast.addEventListener('click', (e) => {
   }
   
 function clickdel() {
-    del.click()
+    output2 = output2.toString().slice(0, -1)
+    underoutput.innerText = output2
+    oneDot = output2.includes('.')
   }
   
   function clickclear() {
