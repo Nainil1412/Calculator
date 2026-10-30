@@ -2,6 +2,7 @@ const number = document.querySelectorAll('.number')
 const operation = document.querySelectorAll('.operation')
 const resultLast = document.querySelector('.result')
 const clear = document.querySelector('.clear')
+const del = document.querySelector('.delete')
 const overoutput = document.querySelector('.overoutput')
 const underoutput = document.querySelector('.underoutput')
 const tempoutput = document.querySelector('.tempoutput')
@@ -150,6 +151,8 @@ function clickdel() {
     underoutput.innerText = output2
     oneDot = output2.includes('.')
   }
+
+  del.addEventListener('click', clickdel)
   
   function clickclear() {
     clear.click()
