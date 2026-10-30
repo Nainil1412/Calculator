@@ -6,7 +6,7 @@ const path = require('node:path');
 
 function calculator() {
   const html = fs.readFileSync(path.join(__dirname, 'index1.html'), 'utf8');
-  const elements = [...html.matchAll(/<(button|div) class="([^"]+)">([^<]*)<\/\1>/g)].map(([, tag, className, text]) => ({
+  const elements = [...html.matchAll(/<(button|div)\s+class="([^"]+)"[^>]*>([^<]*)<\/\1>/g)].map(([, tag, className, text]) => ({
     className, innerText: text, listeners: {},
     addEventListener(event, fn) { this.listeners[event] = fn; },
     click() { this.listeners.click?.({ target: this }); }
@@ -58,6 +58,12 @@ test('Backspace on empty input is harmless', () => {
   const app = calculator();
   app.key('Backspace');
   assert.equal(app.output(), '');
+});
+test('visible delete button removes the last digit', () => {
+  const app = calculator();
+  app.type('123');
+  app.click('⌫');
+  assert.equal(app.output(), '12');
 });
 test('deleting a decimal allows a replacement decimal', () => {
   const app = calculator();
